@@ -1,22 +1,7 @@
 # get_distance_from_geo_yandex_api_using_flask
 
 ***********************************
-INSTALATION:
-
-Python 3.8
-
-Get this token key:
-+ Yandex Geo API
-
-Get this Python libraries installed:
-
-+ Flask
-+ Shapely
-+ Numpy
-+ Pytest
-+ Yandex-geocoder
-
-Steps:
+INSTALATION and USE:
 
 1. get code
 1.1 clone
