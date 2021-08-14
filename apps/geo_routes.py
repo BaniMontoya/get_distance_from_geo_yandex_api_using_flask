@@ -20,15 +20,22 @@ geo = flask.Blueprint('geo', __name__)
 logging.basicConfig(level=logging.DEBUG, filename="all_logs.log", filemode="a+",
                     format="%(asctime)-15s %(levelname)-8s %(message)s")
 
-def calculateDistanceFromMoscou(y, x):
-    '''
-    calculateDistanceFromMoscou
-    '''
+
+def calculateDistanceFromMoscou(ySource, xSource):
+    """
+    [get tuple with distance from moscu]
+    Args:
+        ySource ([float]): [dimension x]
+        xSource ([float]): [y dimension]
+
+    Returns:
+        [tuple]: [return distanceInMeters and distanceInDegrees]
+    """
     distance = 0
-    point = Point(y, x)
+    point = Point(ySource, xSource)
     polygon = Polygon(np.column_stack((LONS, LATS)))
     p1, p2 = nearest_points(polygon, point)
-    if  polygon.contains(point):
+    if polygon.contains(point):
         return str(0), str(0)
     else:
         distanceInDegrees = Point(p1).distance(Point(p2))
@@ -41,18 +48,23 @@ def calculateDistanceFromMoscou(y, x):
 
 
 @geo.route('/getDistanceFromMoscou/<destiny>/', methods=['GET'])
-def getDistanceFromMoscou(destiny):
-    '''
-    Endpoint to get find distance from the Moscow Ring Road to the specified addressy .
-    '''
+def getDistanceFromMoscou(destinyAddress):
+    """
+    [Endpoint to get find distance from the Moscow Ring Road to the specified addressy]
+    Args:
+        destinyAddress ([str]): [destinyAddress requested]
+
+    Returns:
+        [tuple]: [return distanceInMeters and distanceInDegrees as json or reuturn an json with error.]
+    """
     client = Client("43c7e76d-3153-490e-b25f-72f105c21c74")
     try:
-        y, x = client.coordinates(destiny.replace("+", " "))
+        y, x = client.coordinates(destinyAddress.replace("+", " "))
         distanceInMeters, distanceInDegrees = calculateDistanceFromMoscou(y, x)
         if distanceInDegrees == 0 and distanceInMeters == 0:
-            return flask.jsonify({"Message":"Is Inside Moscow Ring Road"})
+            return flask.make_response(flask.jsonify({"Message": "Inside Moscow Ring Road"}), 200)
 
         else:
-            return flask.jsonify({"distanceInMeters": distanceInMeters, "distanceInDegrees": distanceInDegrees})
+            return flask.make_response(flask.jsonify({"distanceInMeters": distanceInMeters, "distanceInDegrees": distanceInDegrees}), 200)
     except:
-        return flask.jsonify({"Message": "Is an Invalid address, you can fix and try again."})
+        return flask.make_response(flask.jsonify({"Message": "Invalid address, you can fix and try again."}), 200)

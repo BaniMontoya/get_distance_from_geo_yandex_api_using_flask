@@ -1,67 +1,48 @@
 # test_hello.py
+import json
 from apps.home import app
 from unittest import TestCase
 import logging
 
+LOGGER = logging.getLogger(__name__)
+
 
 class AppTest(TestCase):
-    def setUp(self) -> None:
-        logging.basicConfig(level=logging.DEBUG, filename="tests_logs.log", filemode="a+",
-                        format="%(asctime)-15s %(levelname)-8s %(message)s")
-        return super().setUp()
-    
+
     def test_home(self):
+        """
+        [testing home path]
+        """
         response = app.test_client().get('/')
         assert response.status_code == 200
 
     def test_distance(self):
-        # testing worng url
+        """
+        [All tests of getDistanceFromMoscou ]
+        """
+        # testing worng path
         response = app.test_client().get('/getDistanceFromMoscou')
         assert response.status_code == 404
-        # testing  correct url and correct addres, inside
+        # testing  correct path and correct addres, inside
         address = "Tikhoretskiy Bul'var, 1, Moscow, Rusia, 109559"
-        response = app.test_client().get(f'/getDistanceFromMoscou/{address.replace(" ","+")}/')
-        logging.info(response.data)
-
+        response = app.test_client().get(
+            f'/getDistanceFromMoscou/{address.replace(" ","+")}/')
+        LOGGER.info("response: "+str(json.loads(response.data)))
         assert response.status_code == 200
-        assert response.data[0] == "0"
-        # correct url and outside
+        assert json.loads(response.data)['distanceInMeters'] == "0"
+        # correct path and outside
         address = "Ulitsa Narodnogo Opolcheniya, 15, Krasnogorsk, Moscow Oblast, Rusia, 143403"
-        response = app.test_client().get(f'/getDistanceFromMoscou/{address.replace(" ","+")}/')
+        response = app.test_client().get(
+            f'/getDistanceFromMoscou/{address.replace(" ","+")}/')
+        LOGGER.info("response: "+str(json.loads(response.data)))
         assert response.status_code == 200
-
-#assert coordinates == (Decimal("37.587093"), Decimal("55.733969"))
- 
-'''
-
-polygon = Polygon(np.column_stack((lon, lat)))
-
-x = -0.1081339
-y = 78.4699519
-point = Point(y, x)
-print(polygon.contains(point))
-print(point.within(polygon))
-
-# true
-x2 = 55.825279
-y2 = 37.5974423
-point = Point(y2, x2)
-print(polygon.contains(point))
-print(point.within(polygon))
-
-# true
-x3 = 55.6743768
-y3 = 37.7414324
-point = Point(y3, x3)
-print(polygon.contains(point))
-print(point.within(polygon))
-
-# false
-x4 = 55.9227296
-y4 = 37.6882454, 13
-point = Point(y4, x4)
-print(polygon.contains(point))
-print(point.within(polygon))
-
-
-'''
+        assert json.loads(response.data) == {
+            'distanceInDegrees': '0.07486909753029411', 'distanceInMeters': '8320.876630419356'}
+        # correct path and worng address
+        address = "NOEXIST"
+        response = app.test_client().get(
+            f'/getDistanceFromMoscou/{address.replace(" ","+")}/')
+        LOGGER.info("response: "+str(json.loads(response.data)))
+        assert response.status_code == 200
+        assert json.loads(response.data) == {
+            'Message': 'Invalid address, you can fix and try again.'}
