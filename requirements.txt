@@ -1,0 +1,5 @@
+numpy==1.17.4
+Shapely==1.7.1
+Flask==2.0.1
+yandex_geocoder==2.0.0
+pytest

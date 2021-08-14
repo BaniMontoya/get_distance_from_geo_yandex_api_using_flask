@@ -1,0 +1,10 @@
+2021-08-14 13:21:14,519 - run - INFO - {'distanceInMeters': '0', 'distanceInDegrees': '0'}
+2021-08-14 13:21:15,606 - run - INFO -  Google Maps link, https://www.google.com.ec/maps/dir/55.789542,37.372943/55.831175,37.310717/@55.789542,37.372943,11z/
+2021-08-14 13:21:15,607 - run - INFO - ··································································
+2021-08-14 13:21:15,608 - run - INFO - {'distanceInMeters': '8320.876630419356', 'distanceInDegrees': '0.07486909753029411'}
+2021-08-14 13:21:16,611 - run - INFO - {'Message': 'Invalid address, you can fix and try again.'}
+2021-08-14 13:26:24,296 - run - INFO - {'distanceInMeters': '0', 'distanceInDegrees': '0'}
+2021-08-14 13:26:26,413 - run - INFO -  Google Maps link, https://www.google.com.ec/maps/dir/55.789542,37.372943/55.831175,37.310717/@55.789542,37.372943,11z/
+2021-08-14 13:26:26,413 - run - INFO - ··································································
+2021-08-14 13:26:26,414 - run - INFO - {'distanceInMeters': '8320.876630419356', 'distanceInDegrees': '0.07486909753029411'}
+2021-08-14 13:26:27,477 - run - INFO - {'Message': 'Invalid address, you can fix and try again.'}

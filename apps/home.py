@@ -1,14 +1,23 @@
+
 import flask
-from .geo_routes import geo
+import numpy as np
+from shapely.geometry import Point
+from shapely.geometry.polygon import Polygon
+from yandex_geocoder import Client
+from flask import current_app
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
-app.register_blueprint(geo)
 
 
-@app.route('/')
+router_home = flask.Blueprint('router_home', __name__)
+
+
+@router_home.route('/')
 def home():
     '''
     return message as json with a little documentation documentation.
     '''
-    return flask.jsonify({"Resume": "Api to get find distance from the Moscow Ring Road to the specified addressy.", "distance/MKAD/<address>/": "Send a GET request over HTTP with destiny param <address>, example: distance/MKAD/address/"})
+    res = {
+        "Resume": "Api to get find distance from the Moscow Ring Road to the specified addressy.",
+        "distance/MKAD/<address>/": "Send a GET request over HTTP with destiny param <address>, example: distance/MKAD/address/"
+    }
+    return flask.jsonify(res)

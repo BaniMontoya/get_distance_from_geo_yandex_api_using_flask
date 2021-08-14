@@ -1,8 +1,8 @@
 # test_hello.py
-import json
-from apps.home import app
-from unittest import TestCase
 import logging
+from unittest import TestCase
+import json
+from run import app
 
 LOGGER = logging.getLogger(__name__)
 
