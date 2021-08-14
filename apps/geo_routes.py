@@ -47,7 +47,7 @@ def calculateDistanceFromMoscou(ySource, xSource):
         return str(distanceInMeters), str(distanceInDegrees)
 
 
-@geo.route('/getDistanceFromMoscou/<destiny>/', methods=['GET'])
+@geo.route('/getDistanceFromMoscou/<destinyAddress>/', methods=['GET'])
 def getDistanceFromMoscou(destinyAddress):
     """
     [Endpoint to get find distance from the Moscow Ring Road to the specified addressy]
