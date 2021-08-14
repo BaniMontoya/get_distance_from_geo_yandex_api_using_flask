@@ -18,6 +18,6 @@ def home():
     '''
     res = {
         "Resume": "Api to get find distance from the Moscow Ring Road to the specified addressy.",
-        "distance/MKAD/<address>/": "Send a GET request over HTTP with destiny param <address>, example: distance/MKAD/address/"
+        "/getDistanceFromMoscou/<address>}/'": "Send a GET request over HTTP with destiny param <address>"
     }
     return flask.jsonify(res)
