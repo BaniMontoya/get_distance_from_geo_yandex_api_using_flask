@@ -43,6 +43,6 @@ class AppTest(TestCase):
         response = app.test_client().get(
             f'/getDistanceFromMoscou/{address.replace(" ","+")}/')
         LOGGER.info("response: "+str(json.loads(response.data)))
-        assert response.status_code == 200
+        assert response.status_code == 400
         assert json.loads(response.data) == {
             'Message': 'Invalid address, you can fix and try again.'}

@@ -67,4 +67,4 @@ def getDistanceFromMoscou(destinyAddress):
         else:
             return flask.make_response(flask.jsonify({"distanceInMeters": distanceInMeters, "distanceInDegrees": distanceInDegrees}), 200)
     except:
-        return flask.make_response(flask.jsonify({"Message": "Invalid address, you can fix and try again."}), 200)
+        return flask.make_response(flask.jsonify({"Message": "Invalid address, you can fix and try again."}), 400)
