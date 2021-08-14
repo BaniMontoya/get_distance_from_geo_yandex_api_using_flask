@@ -19,12 +19,16 @@ update KEY value on file apps/geo.py
 >> sh install.sh
 
 5. Using with curl
+
 >> curl http://127.0.0.1:5000/getDistanceFromMoscou/E22,%20Moskva,%20Rusia,%20121500/
-return {
+
+{
   "distanceInDegrees": "0", 
   "distanceInMeters": "0"
 }
+
 >> curl http://127.0.0.1:5000/getDistanceFromMoscou/1/
+
 {
   "Message": "Invalid address, you can fix and try again."
 }
